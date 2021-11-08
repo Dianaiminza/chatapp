@@ -25,8 +25,8 @@ app.use(express.json());
 //   });
 // });
 
-app.use("/auth", auth);
-app.use(verifyAuthentication);
+// app.use("/auth", auth);
+// app.use(verifyAuthentication);
 app.use("/api/posts", posts);
 app.use("/api/profile", profiles);
 app.use("/api/comments", comments);
