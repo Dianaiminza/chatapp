@@ -18,12 +18,12 @@ connectToDB(process.env.DB_URL);
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.status(200).json({
-    message: "Data fetched successfully.",
-    response: "Welcome to the Probook API!",
-  });
-});
+// app.get("/", (req, res) => {
+//   res.status(200).json({
+//     message: "Data fetched successfully.",
+//     response: "Welcome to the Probook API!",
+//   });
+// });
 
 app.use("/auth", auth);
 app.use(verifyAuthentication);
