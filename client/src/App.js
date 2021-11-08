@@ -1,24 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import Login from "./pages/Login";
+
+import Layout from "./components/Layout";
+import Profile from "./pages/Profile";
+import PrivateRoute from "./components/PrivateRoute";
+import { Route, Switch } from "react-router";
+import Home from "./pages/Home";
+import PostDetails from "./pages/PostDetails";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import axios from "axios";
+import { setAuth } from "./redux/authSlice";
 
 function App() {
+  const dispatch = useDispatch();
+  const { isLoggedIn } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if ("login" in localStorage) {
+      const login = JSON.parse(localStorage.getItem("login"));
+      axios.defaults.headers.common["authorization"] = `Bearer ${login.token}`;
+    }
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    const { isLoggedIn } = JSON.parse(localStorage.getItem("login")) || {};
+    if (isLoggedIn) {
+      dispatch(setAuth({ isLoggedIn }));
+    }
+  }, [dispatch, isLoggedIn]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Switch>
+      <PrivateRoute exact path="/profile/:id">
+        <Layout>
+          <Profile />
+        </Layout>
+      </PrivateRoute>
+      <PrivateRoute exact path="/posts/:id">
+        <Layout>
+          <PostDetails />
+        </Layout>
+      </PrivateRoute>
+      <PrivateRoute exact path="/">
+        <Layout>
+          <Home />
+        </Layout>
+      </PrivateRoute>
+      <Route path="/login">
+        <Login />
+      </Route>
+    </Switch>
   );
 }
 
