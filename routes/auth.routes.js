@@ -23,7 +23,7 @@ router.post("/register", async (req, res) => {
       user.password = await bcrypt.hash(user.password, salt);
       user = await user.save();
 
-      const token = generateAuthToken(user._id);
+      // const token = generateAuthToken(user._id);
       const profile = await new Profile({ userId: user._id });
       const followers = await new Follower({ userId: user._id });
       const followings = await new Following({ userId: user._id });
@@ -36,7 +36,7 @@ router.post("/register", async (req, res) => {
           name: user.name,
           email: user.email,
           _id: user._id,
-          token,
+          
         },
       });
     }
