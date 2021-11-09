@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+require("dotenv").config();
 var config =require ('./config');
 const auth = require("./routes/auth.routes");
 const posts = require("./routes/posts.routes");

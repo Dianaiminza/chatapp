@@ -7,7 +7,7 @@ const Profile = require("../models/profile.model");
 const Follower = require("../models/follower.model");
 const Following = require("../models/following.model");
 const verifyAuthentication = require("../middlewares/auth.middleware");
-
+require("dotenv").config();
 router.post("/register", async (req, res) => {
   try {
     const { email } = req.body;
@@ -34,8 +34,7 @@ router.post("/register", async (req, res) => {
         message: "User created successfully.",
         response: {
           token,
-          name: user.
-          name,
+          name: user.name,
           email: user.email,
           _id: user._id,
           
