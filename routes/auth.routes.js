@@ -6,6 +6,7 @@ const router = express.Router();
 const Profile = require("../models/profile.model");
 const Follower = require("../models/follower.model");
 const Following = require("../models/following.model");
+const dotenv =require('dotenv');
 const verifyAuthentication = require("../middlewares/auth.middleware");
 require("dotenv").config();
 router.post("/register", async (req, res) => {

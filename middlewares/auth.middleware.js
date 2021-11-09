@@ -1,7 +1,8 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user.model");
+const dotenv =require('dotenv');
 require("dotenv").config();
-const JWT_SECRET = process.env.JWT_KEY;
+const JWT_SECRET = 'captain';
 const verifyAuthentication = async (req, res, next) => {
   try{
     const bearerToken = req.headers["authorization"];
